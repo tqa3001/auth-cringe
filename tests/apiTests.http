@@ -1,0 +1,14 @@
+### Status
+GET http://localhost:3000/status 
+
+### Login (body-parser => app.use(express.json()) to parse this)
+POST http://localhost:3000/auth HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "greyrabbit", 
+  "password": "12345678"
+}
+
+### Test-access 
+GET http://localhost:3000/user HTTP/1.1
