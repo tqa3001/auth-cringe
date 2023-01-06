@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'user.html')); 
   } else {
     res.status(401).json({ "msg": "permission denied" }); 
-  }
+  } 
   
   // if (req.body.authenticated == true) { // horrible security measure
   //   res.sendFile(path.join(__dirname, '..', 'views', 'user.html')); 

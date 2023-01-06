@@ -1,23 +1,26 @@
 const User = require('../schemas/user.js'); 
-let staticDB = {
-  "admin": "1" 
-}; 
 
-async function hasUser(username, password) {
-  let ret = false; 
-  await User.findOne({ username, password })
-            .then((data) => { ret = (data != null); })
-            .catch((err) => console.log('bruh', err)); 
+async function hasMatch(query) {
+  const ret = false; 
+  await User.findOne(query)
+            .then((data) => { ret = (data != null); }) 
+            .catch((err) => { throw new Error(err); }); 
   return ret; 
 }
 
-function hasUsername(username) {
-  return !!User.exists({ username: username }); 
+async function hasUser(username, password) {
+  const ret = await hasMatch({ username, password }); 
+  return ret; 
+}
+
+async function hasUsername(username) {
+  let ret = await hasMatch({ username }); 
+  return ret; 
 }
 
 async function addUser(username, password, retype) {
   try {
-    if (hasUsername(username)) {
+    if (await hasUsername(username)) {
       throw new Error('Username already exists!'); 
     } else if (password != retype) {
       throw new Error('Password does not match'); 
@@ -28,9 +31,6 @@ async function addUser(username, password, retype) {
   } catch(err) {
     throw new Error(err); 
   }
-  console.log('adding works'); 
-  const user = new User({ username, password }); 
-  await user.save().then(() => console.log('New user created')); 
 }
 
 async function getDB() {

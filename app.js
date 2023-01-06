@@ -9,7 +9,7 @@ const session = require('express-session');
 const store = new session.MemoryStore();  // for testing only, not for development.
 const { getDB } = require('./services/database.js'); 
 
-console.log(process.env.URI);
+console.log(process.env.URI);  // remove this lmao
 /* Mongoose */
 async function connectMongoDB() {
   try { 
@@ -26,7 +26,7 @@ const app = express();
 app.use(cors());   // corsOptions not defined 
 app.use(require('./middlewares/logger.js')); 
 app.use(session({
-  secret: "bing chilling",
+  secret: "bing chilling", // development: make this long, private, and random. 
   resave: false, 
   cookie: { maxAge: 60000 }, 
   saveUninitialized: false, 
@@ -44,7 +44,7 @@ app.use(async (req, res, next) => {
 
 /* Parsing POST body */
 app.use(require('body-parser').urlencoded({ extended: false })); 
-app.use(express.json());  // later versions of expressj
+app.use(express.json());  // later versions of expressjs
 
 /* Routes */ 
 app.use('/', require('./routes/landing.js')); 
