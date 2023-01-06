@@ -9,7 +9,6 @@ const session = require('express-session');
 const store = new session.MemoryStore();  // for testing only, not for development.
 const { getDB } = require('./services/database.js'); 
 
-console.log(process.env.URI);  // remove this lmao
 /* Mongoose */
 async function connectMongoDB() {
   try { 
