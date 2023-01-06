@@ -33,10 +33,10 @@ app.use(session({
   store: store 
 }));  // wait this is deprecated?!
 
-// Cringe ahh ahh code
-app.use((req, res, next) => {
-  console.log("Current DB: "); 
-  console.log(getDB()); 
+// Print current state
+app.use(async (req, res, next) => {
+  console.log("Current DB: ");
+  console.log(await getDB()); 
   console.log("Current store: "); 
   console.log(store); 
   next(); 
