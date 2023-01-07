@@ -3,8 +3,12 @@ const path = require('path');
 const router = Router(); 
 
 router.get('/', (req, res, next) => { // using next()
-  res.sendFile(path.join(__dirname, '..', 'views', '/login.html')); 
-  next(); 
+  if (req.session.authenticated) {
+    res.redirect('/user'); 
+  } else {
+    res.sendFile(path.join(__dirname, '..', 'views', '/login.html')); 
+    next(); 
+  }
 }, (req, res) => {
   console.log(req.method); 
 }); 
