@@ -3,13 +3,11 @@ const { hasUser } = require('../services/database');
 const router = Router(); 
 
 router.post('/', async (req, res) => {
-  console.log('session id: ', req.sessionID); 
-  console.log('hmm', req.session); 
   if (req.session.authenticated) {
     console.log('using current session'); 
     res.redirect('/user');
   } else {
-    req.session.authenticated = false; 
+    req.session.authenticated = false;  // i think the session is saved to the store whenevver session is accessed? 
     const { username, password } = req.body;  
     const verdict = await hasUser(username, password); 
     if (verdict) {   // error not handled haha lmao goofy asf quandale dinglenut

@@ -6,7 +6,8 @@ const mongoose = require('mongoose');
 const passport = require('passport'); 
 const LocalStrategy = require('passport-local').Strategy; 
 const session = require('express-session'); 
-const store = new session.MemoryStore();  // for testing only, not for development.
+// const store = new session.MemoryStore();  // for testing only, not for development.
+const MongoStore = require('connect-mongo'); 
 const { getDB } = require('./services/database.js'); 
 
 /* Mongoose */
@@ -25,19 +26,22 @@ const app = express();
 app.use(cors());   // corsOptions not defined 
 app.use(require('./middlewares/logger.js')); 
 app.use(session({
-  secret: "bing chilling", // development: make this long, private, and random. 
+  secret: "a key used for signing cookies", // development: make this long, private, and random. 
   resave: false, 
   cookie: { maxAge: 60000 }, 
   saveUninitialized: false, 
-  store: store 
+  store: MongoStore.create({ 
+    mongoUrl: process.env.URI, 
+    // touchAfter: 24 * 3600,  // update every 24 hours (default -> every time user refreshes?)
+  })
 }));  // wait this is deprecated?!
 
 // Print current state
 app.use(async (req, res, next) => {
+  console.log("Session id: ", req.sessionID); 
+  console.log("Current session: ", req.session); 
   console.log("Current DB: ");
   console.log(await getDB()); 
-  console.log("Current store: "); 
-  console.log(store); 
   next(); 
 }); 
 

@@ -1,10 +1,10 @@
 const User = require('../schemas/user.js'); 
 
 async function hasMatch(query) {
-  const ret = false; 
+  let ret = false; 
   await User.findOne(query)
             .then((data) => { ret = (data != null); }) 
-            .catch((err) => { throw new Error(err); }); 
+            .catch((err) => { throw err; }); 
   return ret; 
 }
 
