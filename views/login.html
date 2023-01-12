@@ -8,12 +8,18 @@
 </head>
 <body>
   <h1>Authentication</h1>
-  <form method="post" action="/auth/login">
-    <label>Username: </label>
-    <input type="text" id="username" name="username"> <br><br>
-    <label>Password: </label>
-    <input type="password" id="password" name="password"> <br><br>
-    <input type="submit" value="Login"> 
+  <form action="/auth/login" method="post" >
+    <section>
+      <label>Username: </label>
+      <input type="text" id="username" name="username"> <br><br>
+    </section>
+    <section>
+      <label>Password: </label>
+      <input type="password" id="password" name="password"> <br><br>
+    </section> 
+    <input type="submit" value="Login">  
   </form>
 </body>
 </html>
+
+<!-- Note: the field name for username & password must be 'username', 'password' for passport-local-mongoose to work -->

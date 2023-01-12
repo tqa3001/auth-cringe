@@ -1,19 +1,12 @@
-const express = require('express'); 
 const path = require('path'); 
-const router = express.Router(); 
+const router = require('express').Router(); 
 
 router.get('/', (req, res) => {
-  if (req.session.authenticated) {
+  if (req.isAuthenticated()) {
     res.sendFile(path.join(__dirname, '..', 'views', 'user.html')); 
   } else {
-    res.status(401).json({ "msg": "permission denied" }); 
+    res.status(401).json({ "msg": "permission denied" });  // either this or redirect to login 
   } 
-  
-  // if (req.body.authenticated == true) { // horrible security measure
-  //   res.sendFile(path.join(__dirname, '..', 'views', 'user.html')); 
-  // } else {
-  //   res.status(401).send('Permission denied'); 
-  // }
 }); 
 
 module.exports = router; 

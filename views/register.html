@@ -8,14 +8,32 @@
 </head>
 <body>
   <h1>Create new account</h1>
-  <form method="post" action="/auth/register">
-    <label>Username: </label>
-    <input type="text" id="username" name="username"> <br></br>
-    <label>Password: </label> 
-    <input type="password" id="password" name="password"> <br></br> 
-    <label>Re-enter password </label> 
-    <input type="password" id="retype" name="retype"> <br></br>
-    <input type="submit" value="Signup">
+  <form action="/auth/register" method="post" >
+    <section> 
+      <label>Username: </label>
+      <input type="text" id="username" name="username"> <br></br>
+    </section>
+    <section>
+      <label>Password: </label>  <!-- TODO: add hide/show password + password constraints -->
+      <input type="password" id="newPassword" name="newPassword"> <br></br> 
+    </section>
+    <section> 
+      <label>Re-enter password: </label> 
+      <input type="password" id="retypePassword" name="retypePassword"> <br></br>
+    </section>
+    <section>
+      <label>Name: </label>
+      <input type="text" id="name" name="name"> <br></br>
+    </section>
+    <section>
+      <label>Email: </label>
+      <input type="email" id="email" name="email"> <br></br>
+    </section>
+    <input type="submit" value="Register">
   </form>
 </body>
 </html>
+
+<!-- 
+  
+-->
